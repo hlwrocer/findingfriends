@@ -53,4 +53,31 @@ function deck(){
 	}
 }
 
+function game(numPlayers, numDecks){
+//other things tbd
+	this.numPlayers = numPlayers;	
+	this.curPlayers = 0;
+	this.players = [];
+	this.deck = new deck();
 
+	for (var deck = 1; deck < numDecks; deck++){
+		(this.deck).join(new deck());	
+	}
+
+	function addPlayer(playerName){
+		this.curPlayers++;
+		(this.players).push(new player(playerName));
+	}
+
+
+}
+
+function player(name){
+	this.score = 2;
+	this.playerName = name;
+	this.cards = [];
+
+	function sortHand(){
+
+	}
+}
