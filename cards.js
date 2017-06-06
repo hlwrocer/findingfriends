@@ -53,20 +53,26 @@ function deck(){
 	}
 }
 
-function game(numPlayers, numDecks){
+function game(numPlayers, numDecks, gameOwner){
 //other things tbd
+	this.owner = gameOwner;
 	this.numPlayers = numPlayers;	
-	this.curPlayers = 0;
-	this.players = [];
+	this.curPlayers = 1;
+	this.players = [new player(gameOwner)];
 	this.deck = new deck();
 
 	for (var deck = 1; deck < numDecks; deck++){
 		(this.deck).join(new deck());	
 	}
+	(this.deck).shuffle(7);
 
 	function addPlayer(playerName){
 		this.curPlayers++;
 		(this.players).push(new player(playerName));
+	}
+
+	function dealCards(){
+
 	}
 
 
@@ -77,7 +83,39 @@ function player(name){
 	this.playerName = name;
 	this.cards = [];
 
-	function sortHand(){
+	this.addCard = function(card){
+		(this.cards).push(card);
+	}
 
+	this.sortHand = function(trumpSuit, trumpNum){
+		hearts = [];
+		spades = [];
+		diamonds = [];
+		clubs = [];
+		trump = [];
+		
+		//sort into suits
+		for (var card = 0; card < (this.cards).length; card++){
+			if (card.suit === "c" && card.value !== trumpNum){
+				clubs.push(card);
+			}
+			else if (card.suit === "d" && card.value !== trumpNum){
+				diamonds.push(card);
+			}
+			else if (cards.suit === "s" && card.value !== trumpNum){
+				spades.push(card);
+			}
+			else if (cards.suit === "h" && card.value !== trumpNum){
+				hearts.push(card);
+			}
+			else{
+				trump.push(card);	
+			}
+		}
+	}
+
+	function sortSuit(cardArray, isTrump=false. trumpSuit=null){
+		//probably merge sort
+		return cardArray
 	}
 }
