@@ -14,7 +14,7 @@ function card(value, name, suit){
 //deck constructor
 function deck(){
 
-	this.create = function(){
+	this.cards = (function(){
 		var names = ['1','2','3','4','5','6','7','8','9','10','J','Q','K'];
 		var suits = ['H','C','D','S'];
 		var cards = [];
@@ -30,10 +30,8 @@ function deck(){
 		cards.push(new card (15, 'BJ', 'Joker'));
 		
 		return cards
-	}
-	
-	this.cards = this.create(); //initialize deck to be 54 cards
-	
+	})();
+
 	this.join = function(deck){//combine another deck into this one
 		this.cards = (this.cards).concat(deck.cards);
 	}
