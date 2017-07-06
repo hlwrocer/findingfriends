@@ -62,15 +62,29 @@ function game(numPlayers, numDecks, gameOwner){
 	for (var deck = 1; deck < numDecks; deck++){
 		(this.deck).join(new deck());	
 	}
-	(this.deck).shuffle(7);
-
+	
 	function addPlayer(playerName){
 		this.curPlayers++;
 		(this.players).push(new player(playerName));
 	}
 
 	function dealCards(){
-
+		var curPlayer = genWholeRand(7);
+		var cardsToDeal = Math.floor(deck.length/this.numPlayers) * this.numPlayers;
+		for (var card = 0; card < cardsToDeal; card++){
+			this.players[curPlayer].addCard[(this.deck).shift()];
+			curPlayer = (curPlayer + 1) % this.numPlayers;
+		}
+	}
+	
+	function start(){
+		if (this.curPlayers !== this.numPlayers){
+			//TODO/REMINDER: gray out start button or something when doing UI	
+		}else{
+			(this.deck).shuffle(7);
+			this.dealCards();
+			//more game logic here tbd;
+		}
 	}
 
 
@@ -112,8 +126,11 @@ function player(name){
 		}
 	}
 
-	function sortSuit(cardArray, isTrump=false. trumpSuit=null){
+	function sortSuit(cardArray, isTrump=false, trumpSuit=null){
 		//probably merge sort
+		//possibly unneeded? If cards dealt one at a time sort/insert that card object one at a time, sequentially
+		//^ might need for trump e.g trump suit = clubs flip to hearts. Or allow for manual moving of cards
+		// and add a sort button.
 		return cardArray
 	}
 }
