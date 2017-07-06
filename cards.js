@@ -49,6 +49,14 @@ function Deck(){
 			numtimes -= 1;
 		}
 	}
+	
+	this.dealCard = function(){
+		return this.cards.shift();	
+	}
+	
+	this.shuffleCard = function(card){
+		this.cards.push(card);	
+	}
 }
 
 function Game(numPlayers, numDecks, gameOwner){
@@ -56,23 +64,24 @@ function Game(numPlayers, numDecks, gameOwner){
 	this.owner = gameOwner;
 	this.numPlayers = numPlayers;	
 	this.curPlayers = 1;
-	this.players = [new player(gameOwner)];
-	this.cards = new Deck();
+	this.players = [new Player(gameOwner)];
+	this.deck = new Deck();
 
 	for (var deck = 1; deck < numDecks; deck++){
-		(this.cards).join(new Deck());	
+		(this.deck).join(new Deck());	
 	}
 	
 	this.addPlayer = function(playerName){
 		this.curPlayers++;
-		(this.players).push(new player(playerName));
+		(this.players).push(new Player(playerName));
 	}
 
 	this.dealCards = function(){
 		var curPlayer = genWholeRand(7);
-		var cardsToDeal = Math.floor(this.cards.length/this.numPlayers) * this.numPlayers;
+		var cardsToDeal = Math.floor(this.deck.cards.length/this.numPlayers) * this.numPlayers;
+		console.log(cardsToDeal);
 		for (var card = 0; card < cardsToDeal; card++){
-			this.players[curPlayer].addCard[(this.cards).shift()];
+			this.players[curPlayer].addCard((this.deck).dealCard());
 			curPlayer = (curPlayer + 1) % this.numPlayers;
 		}
 	}
