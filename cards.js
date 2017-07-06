@@ -63,12 +63,12 @@ function Game(numPlayers, numDecks, gameOwner){
 		(this.cards).join(new Deck());	
 	}
 	
-	function addPlayer(playerName){
+	this.addPlayer = function(playerName){
 		this.curPlayers++;
 		(this.players).push(new player(playerName));
 	}
 
-	function dealCards(){
+	this.dealCards = function(){
 		var curPlayer = genWholeRand(7);
 		var cardsToDeal = Math.floor(deck.length/this.numPlayers) * this.numPlayers;
 		for (var card = 0; card < cardsToDeal; card++){
@@ -77,7 +77,7 @@ function Game(numPlayers, numDecks, gameOwner){
 		}
 	}
 	
-	function start(){
+	this.start = function(){
 		if (this.curPlayers !== this.numPlayers){
 			//TODO/REMINDER: gray out start button or something when doing UI	
 		}else{
