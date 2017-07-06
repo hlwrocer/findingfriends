@@ -70,7 +70,7 @@ function Game(numPlayers, numDecks, gameOwner){
 
 	this.dealCards = function(){
 		var curPlayer = genWholeRand(7);
-		var cardsToDeal = Math.floor(deck.length/this.numPlayers) * this.numPlayers;
+		var cardsToDeal = Math.floor(this.cards.length/this.numPlayers) * this.numPlayers;
 		for (var card = 0; card < cardsToDeal; card++){
 			this.players[curPlayer].addCard[(this.cards).shift()];
 			curPlayer = (curPlayer + 1) % this.numPlayers;
