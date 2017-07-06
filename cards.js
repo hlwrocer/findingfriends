@@ -3,7 +3,7 @@ function genWholeRand(hi){
 	return Math.floor(Math.random() * (hi));
 }
 
-//card constructor
+//card object
 //for jokers, value - 15 big 14 small name = SJ/BJ, suit = Joker
 function Card(value, name, suit){
 	this.value = value;
@@ -11,7 +11,7 @@ function Card(value, name, suit){
 	this.suit = suit;
 }
 
-//deck constructor
+//deck object
 function Deck(){
 
 	this.cards = (function(){
@@ -31,12 +31,12 @@ function Deck(){
 		
 		return cards
 	})();
-
-	this.join = function(deck){//combine another deck into this one
+}
+Deck.prototype = {
+	join: function(deck){//combine another deck into this one
 		this.cards = (this.cards).concat(deck.cards);
-	}
-	
-	this.shuffle = function(numtimes){//randomly shuffle the deck numtimes
+	},
+	shuffle: function(numtimes){//randomly shuffle the deck numtimes
 		while(numtimes > 0){
 			var shuffledCards = [];
 			var numCards = this.cards.length;
@@ -48,16 +48,16 @@ function Deck(){
 			this.cards = shuffledCards;
 			numtimes -= 1;
 		}
-	}
-	
-	this.dealCard = function(){
+	},
+	dealCard: function(){
 		return this.cards.shift();	
-	}
-	
-	this.shuffleCard = function(card){
+	},
+	shuffleCard: function(card){
 		this.cards.push(card);	
 	}
 }
+	
+
 
 function Game(numPlayers, numDecks, gameOwner){
 //other things tbd
