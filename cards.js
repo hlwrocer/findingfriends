@@ -5,14 +5,14 @@ function genWholeRand(hi){
 
 //card constructor
 //for jokers, value - 15 big 14 small name = SJ/BJ, suit = Joker
-function card(value, name, suit){
+function Card(value, name, suit){
 	this.value = value;
 	this.name = name;
 	this.suit = suit;
 }
 
 //deck constructor
-function deck(){
+function Deck(){
 
 	this.cards = (function(){
 		var names = ['1','2','3','4','5','6','7','8','9','10','J','Q','K'];
@@ -21,13 +21,13 @@ function deck(){
 		//gen 52 suited cards
 		for (var suit = 0; suit < suits.length; suit++){
 			for (var name = 0; name < names.length; name++){
-				cards.push( new card(name+1,names[name], suits[suit]));
+				cards.push( new Card(name+1,names[name], suits[suit]));
 			}
 		}
 		
 		//two jokers
-		cards.push(new card (14, 'SJ', 'Joker'));
-		cards.push(new card (15, 'BJ', 'Joker'));
+		cards.push(new Card (14, 'SJ', 'Joker'));
+		cards.push(new Card (15, 'BJ', 'Joker'));
 		
 		return cards
 	})();
@@ -51,16 +51,16 @@ function deck(){
 	}
 }
 
-function game(numPlayers, numDecks, gameOwner){
+function Game(numPlayers, numDecks, gameOwner){
 //other things tbd
 	this.owner = gameOwner;
 	this.numPlayers = numPlayers;	
 	this.curPlayers = 1;
 	this.players = [new player(gameOwner)];
-	this.deck = new deck();
+	this.cards = new Deck();
 
 	for (var deck = 1; deck < numDecks; deck++){
-		(this.deck).join(new deck());	
+		(this.cards).join(new Deck());	
 	}
 	
 	function addPlayer(playerName){
@@ -72,7 +72,7 @@ function game(numPlayers, numDecks, gameOwner){
 		var curPlayer = genWholeRand(7);
 		var cardsToDeal = Math.floor(deck.length/this.numPlayers) * this.numPlayers;
 		for (var card = 0; card < cardsToDeal; card++){
-			this.players[curPlayer].addCard[(this.deck).shift()];
+			this.players[curPlayer].addCard[(this.cards).shift()];
 			curPlayer = (curPlayer + 1) % this.numPlayers;
 		}
 	}
@@ -81,7 +81,7 @@ function game(numPlayers, numDecks, gameOwner){
 		if (this.curPlayers !== this.numPlayers){
 			//TODO/REMINDER: gray out start button or something when doing UI	
 		}else{
-			(this.deck).shuffle(7);
+			(this.cards).shuffle(7);
 			this.dealCards();
 			//more game logic here tbd;
 		}
@@ -90,7 +90,7 @@ function game(numPlayers, numDecks, gameOwner){
 
 }
 
-function player(name){
+function Player(name){
 	this.score = 2;
 	this.playerName = name;
 	this.cards = [];
