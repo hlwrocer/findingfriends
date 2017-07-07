@@ -70,13 +70,14 @@ function Game(numPlayers, numDecks, gameOwner){
 	for (var deck = 1; deck < numDecks; deck++){
 		(this.deck).join(new Deck());	
 	}
-	
-	this.addPlayer = function(playerName){
+}
+
+Game.Prototype = {
+	addPlayer: function(playerName){
 		this.curPlayers++;
 		(this.players).push(new Player(playerName));
-	}
-
-	this.dealCards = function(){
+	},
+	dealCards: function(){
 		var curPlayer = genWholeRand(7);
 		var cardsToDeal = Math.floor(this.deck.cards.length/this.numPlayers) * this.numPlayers;
 		console.log(cardsToDeal);
@@ -84,9 +85,8 @@ function Game(numPlayers, numDecks, gameOwner){
 			this.players[curPlayer].addCard((this.deck).dealCard());
 			curPlayer = (curPlayer + 1) % this.numPlayers;
 		}
-	}
-	
-	this.start = function(){
+	},
+	start: function(){
 		if (this.curPlayers !== this.numPlayers){
 			//TODO/REMINDER: gray out start button or something when doing UI	
 		}else{
@@ -95,6 +95,7 @@ function Game(numPlayers, numDecks, gameOwner){
 			//more game logic here tbd;
 		}
 	}
+}
 
 
 }
@@ -103,18 +104,19 @@ function Player(name){
 	this.score = 2;
 	this.playerName = name;
 	this.cards = [];
+}
 
-	this.addCard = function(card){
+Player.prototype = {
+	addCard: function(card){
 		(this.cards).push(card);
-	}
-
-	this.sortHand = function(trumpSuit, trumpNum){
-		hearts = [];
-		spades = [];
-		diamonds = [];
-		clubs = [];
-		trump = [];
-		
+	},
+	sortHand: function(trumpSuit, trumpNum){
+		//eh.. idk if needed we'll see
+		var hearts = [];
+		var spades = [];
+		var diamonds = [];
+		var clubs = [];
+		var trump = [];
 		//sort into suits
 		for (var card = 0; card < (this.cards).length; card++){
 			if (card.suit === "c" && card.value !== trumpNum){
@@ -133,13 +135,15 @@ function Player(name){
 				trump.push(card);	
 			}
 		}
-	}
-
-	function sortSuit(cardArray, isTrump=false, trumpSuit=null){
+	},
+	sortSuit: function sortSuit(cardArray, isTrump=false, trumpSuit=null){
 		//probably merge sort
 		//possibly unneeded? If cards dealt one at a time sort/insert that card object one at a time, sequentially
 		//^ might need for trump e.g trump suit = clubs flip to hearts. Or allow for manual moving of cards
 		// and add a sort button.
+		//possibly just define within sortHand to scope as a helper method?
 		return cardArray
 	}
 }
+
+	
