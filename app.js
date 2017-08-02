@@ -1,12 +1,11 @@
-var express = require('express');
-var path = require('path');
-var app = express();
+import React from 'react';
+import { createStore } from 'redux';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import App from './components/app';
 
-app.set('view engine', 'pug');
-app.set('views', path.join(__dirname, 'views'));
-
-app.get('/', function(req, res){
-	res.send('index');
-});
-app.use('/findingfriends', require('./findingfriends'));
-app.listen(process.env.PORT,process.env.IP,function(){});
+render( 
+ // <Provider store={store}>
+    <div> Helloooooooooo </div>,
+  //</Provider>,
+  document.getElementById('root'));
